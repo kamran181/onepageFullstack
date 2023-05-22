@@ -1,0 +1,84 @@
+<%- include('partials/header'); %>
+    <div class="container ">
+        <h1 style="text-align: center;">EMPLOYEE FORM</h1>
+        <form action="/employee" method="post">
+            <div class="row">
+
+                <input type="hidden" name="hidden_id" value="<%= employee._id%>" >
+
+                <div class="col-lg-6">
+                    <div>
+                        <input class="form-control" type="text" name="firstName"  placeholder="enter your First name"  value="<%= employee.firstName %>" >
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div>
+                        <input class="form-control" type="text" name="lastName" placeholder="Enter your last name" value="<%= employee.lastName%>" >
+                    </div>
+                </div>
+
+                <div class="col-lg-12" style="margin-top: 20px;">
+                    <div>
+                        <input class="form-control" type="email" name="email" placeholder="Enter your email" value="<%= employee.email%>" >
+                    </div>
+                </div>
+
+                <div class="col-lg-12" style="margin-top: 20px;">
+                    <div>
+                        <input class="form-control" type="number" name="contact" placeholder="Enter your contact" value="<%= employee.contact%>">
+                    </div>
+                </div>
+
+                <div class="col-lg-12" style="margin-top: 20px;">
+                    <div>
+                        <input style="width: 100%;" class="btn btn-dark btn-lg" type="submit" value="<%= (employee._id ? 'Update' : 'Submit' )%>">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </form>
+    </div>
+
+    <h1 style="text-align: center; margin-top: 20px;">EMPLOYEE FORM</h1>
+
+    <% if(employees && employees.length>0) { %>
+        <table class="table table-dark">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>email</th>
+                <th>contact</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <% employees.map((employee)=>{ %>
+                    <tr>
+                        <td>
+                            <%= employee.firstName %>
+                        </td>
+                        <td>
+                            <%= employee.lastName %>
+                        </td>
+                        <td>
+                            <%= employee.email %>
+                        </td>
+                        <td>
+                            <%= employee.contact %>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="/remove/<%= employee._id%> ">Delete</a>
+                            <a class="btn btn-warning btn-sm" href="/employee/<%=employee._id%>">Update</a>
+                        </td>
+
+                    </tr>
+                    <% })%>
+            </tbody>
+        </table>
+
+        <% } %>
+
+
+            <%- include('partials/footer'); %>
